@@ -136,7 +136,7 @@ confirmation = st.checkbox("I confirm that all information provided is accurate 
 
 # Submit button with validation
 if st.button("Submit Application"):
-    if not all([first_name, last_name, ssn, email, address]):
+    if not all(field.strip() for field in [first_name, last_name, ssn, email, address]):
         st.error("❌ Please fill all required fields: Name, SSN, Email, and Address.")
     elif not confirmation:
         st.error("❌ Please confirm the information accuracy before submitting.")
