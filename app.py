@@ -61,6 +61,12 @@ with col1:
 with col2:
     email = st.text_input("Email Address")
 address = st.text_input("Address")
+col1, col2 = st.columns(2)
+with col1:
+    city = st.text_input("City")
+with col2:
+    state = st.text_input("State")
+phone_number = st.text_input("Phone Number")
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # Employment Details
@@ -128,7 +134,6 @@ st.markdown('<div class="subheader">Upload Your Documents</div>', unsafe_allow_h
 id_file = st.file_uploader("Upload ID", type=["pdf", "jpg", "png"])
 ssn_file = st.file_uploader("Upload Social Security Card", type=["pdf", "jpg", "png"])
 epa_osha_file = st.file_uploader("Upload EPA/OSHA Licenses", type=["pdf", "jpg", "png"])
-
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # Confirmation Checkbox
@@ -136,8 +141,8 @@ confirmation = st.checkbox("I confirm that all information provided is accurate 
 
 # Submit button with validation
 if st.button("Submit Application"):
-    if not all(field.strip() for field in [first_name, last_name, ssn, email, address]):
-        st.error("❌ Please fill all required fields: Name, SSN, Email, and Address.")
+    if not all(field.strip() for field in [first_name, last_name, ssn, email, address, city, state, phone_number]):
+        st.error("❌ Please fill all required fields: Name, SSN, Email, Address, City, State, and Phone Number.")
     elif not confirmation:
         st.error("❌ Please confirm the information accuracy before submitting.")
     else:
@@ -151,7 +156,8 @@ if st.button("Submit Application"):
             <p><strong>Name:</strong> {first_name} {last_name}</p>
             <p><strong>SSN:</strong> {ssn}</p>
             <p><strong>Email:</strong> {email}</p>
-            <p><strong>Address:</strong> {address}</p>
+            <p><strong>Phone Number:</strong> {phone_number}</p>
+            <p><strong>Address:</strong> {address}, {city}, {state}</p>
 
             <h3>Employment Details</h3>
             <p><strong>Position Applied For:</strong> {position}</p>
